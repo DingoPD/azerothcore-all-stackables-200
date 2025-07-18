@@ -1,32 +1,8 @@
-UPDATE item_template SET stackable=200 WHERE stackable=60;
-UPDATE item_template SET maxcount=200 WHERE maxcount=60;
-UPDATE item_template SET stackable=200 WHERE stackable=20;
-UPDATE item_template SET maxcount=200 WHERE maxcount=20;
-UPDATE item_template SET stackable=200 WHERE stackable=10;
-UPDATE item_template SET maxcount=200 WHERE maxcount=10;
-UPDATE item_template SET stackable=200 WHERE stackable=5;
-UPDATE item_template SET maxcount=200 WHERE maxcount=5;
-UPDATE item_template SET stackable=200 WHERE stackable=12;
-UPDATE item_template SET maxcount=200 WHERE maxcount=12;
-UPDATE item_template SET stackable=200 WHERE stackable=100;
-UPDATE item_template SET maxcount=200 WHERE maxcount=100;
-UPDATE item_template SET stackable=200 WHERE stackable=25;
-UPDATE item_template SET maxcount=200 WHERE maxcount=25;
-UPDATE item_template SET stackable=200 WHERE stackable=30;
-UPDATE item_template SET maxcount=200 WHERE maxcount=30;
-UPDATE item_template SET stackable=200 WHERE stackable=40;
-UPDATE item_template SET maxcount=200 WHERE maxcount=40;
-UPDATE item_template SET stackable=200 WHERE stackable=8;
-UPDATE item_template SET maxcount=200 WHERE maxcount=8;
-UPDATE item_template SET stackable=200 WHERE stackable=15;
-UPDATE item_template SET maxcount=200 WHERE maxcount=15;
-UPDATE item_template SET stackable=200 WHERE stackable=6;
-UPDATE item_template SET maxcount=200 WHERE maxcount=6;
-UPDATE item_template SET stackable=200 WHERE stackable=50;
-UPDATE item_template SET maxcount=200 WHERE maxcount=50;
-UPDATE item_template SET stackable=200 WHERE stackable=4;
-UPDATE item_template SET maxcount=200 WHERE maxcount=4;
-UPDATE item_template SET stackable=200 WHERE stackable=24;
-UPDATE item_template SET maxcount=200 WHERE maxcount=24;
-UPDATE item_template SET stackable=200 WHERE stackable=3;
-UPDATE item_template SET maxcount=200 WHERE maxcount=3;
+CREATE TABLE item_template_backup (
+  entry int unsigned NOT NULL DEFAULT '0',
+  stackable int DEFAULT '1', 
+  PRIMARY KEY (entry)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Item Stack size backup';
+
+INSERT INTO acore_world.item_template_backup (entry,stackable) SELECT entry,stackable FROM acore_world.item_template WHERE acore_world.item_template.stackable > 1;
+UPDATE acore_world.item_template SET stackable=200 WHERE stackable > 1 and stackable < 200;
